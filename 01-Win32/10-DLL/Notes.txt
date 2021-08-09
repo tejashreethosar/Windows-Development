@@ -1,0 +1,2 @@
+All the programs in "Linking" directory are clients.
+All the programs in "Exporting" directory are servers.
