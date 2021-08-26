@@ -1,0 +1,224 @@
+/* Command: DUMPBIN.exe /ALL Window.obj > temp.txt */
+/* I am using this dump to see the name mangling of WndProc i.e. ?WndProc@@YGJPAUHWND__@@IIJ@Z */
+
+Microsoft (R) COFF/PE Dumper Version 14.29.30038.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file Window.obj
+
+File Type: COFF OBJECT
+
+FILE HEADER VALUES
+             14C machine (x86)
+               5 number of sections
+        60DA1986 time date stamp Tue Jun 29 00:18:38 2021
+             44B file pointer to symbol table
+              1E number of symbols
+               0 size of optional header
+               0 characteristics
+
+SECTION HEADER #1
+.drectve name
+       0 physical address
+       0 virtual address
+      5D size of raw data
+      DC file pointer to raw data (000000DC to 00000138)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+  100A00 flags
+         Info
+         Remove
+         1 byte align
+
+RAW DATA #1
+  00000000: 20 20 20 2F 44 45 46 41 55 4C 54 4C 49 42 3A 22     /DEFAULTLIB:"
+  00000010: 75 75 69 64 2E 6C 69 62 22 20 2F 44 45 46 41 55  uuid.lib" /DEFAU
+  00000020: 4C 54 4C 49 42 3A 22 75 75 69 64 2E 6C 69 62 22  LTLIB:"uuid.lib"
+  00000030: 20 2F 44 45 46 41 55 4C 54 4C 49 42 3A 22 4C 49   /DEFAULTLIB:"LI
+  00000040: 42 43 4D 54 22 20 2F 44 45 46 41 55 4C 54 4C 49  BCMT" /DEFAULTLI
+  00000050: 42 3A 22 4F 4C 44 4E 41 4D 45 53 22 20           B:"OLDNAMES" 
+
+   Linker Directives
+   -----------------
+   /DEFAULTLIB:uuid.lib
+   /DEFAULTLIB:uuid.lib
+   /DEFAULTLIB:LIBCMT
+   /DEFAULTLIB:OLDNAMES
+
+SECTION HEADER #2
+.debug$S name
+       0 physical address
+       0 virtual address
+      7C size of raw data
+     139 file pointer to raw data (00000139 to 000001B4)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+42100040 flags
+         Initialized Data
+         Discardable
+         1 byte align
+         Read Only
+
+RAW DATA #2
+  00000000: 04 00 00 00 F1 00 00 00 70 00 00 00 32 00 01 11  ....ñ...p...2...
+  00000010: 00 00 00 00 43 3A 5C 4D 79 50 72 6F 6A 65 63 74  ....C:\MyProject
+  00000020: 73 5C 30 31 2D 57 69 6E 33 32 5C 30 31 2D 57 69  s\01-Win32\01-Wi
+  00000030: 6E 64 6F 77 5C 57 69 6E 64 6F 77 2E 6F 62 6A 00  ndow\Window.obj.
+  00000040: 3A 00 3C 11 01 22 00 00 07 00 13 00 1D 00 56 75  :.<.."........Vu
+  00000050: 01 00 13 00 1D 00 56 75 01 00 4D 69 63 72 6F 73  ......Vu..Micros
+  00000060: 6F 66 74 20 28 52 29 20 4F 70 74 69 6D 69 7A 69  oft (R) Optimizi
+  00000070: 6E 67 20 43 6F 6D 70 69 6C 65 72 00              ng Compiler.
+
+SECTION HEADER #3
+  .rdata name
+       0 physical address
+       0 virtual address
+      26 size of raw data
+     1B5 file pointer to raw data (000001B5 to 000001DA)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40300040 flags
+         Initialized Data
+         4 byte align
+         Read Only
+
+RAW DATA #3
+  00000000: 54 65 6A 61 27 73 20 57 69 6E 64 6F 77 00 00 00  Teja's Window...
+  00000010: 54 4E 54 20 3A 20 4D 79 20 46 69 72 73 74 20 57  TNT : My First W
+  00000020: 69 6E 64 6F 77 00                                indow.
+
+SECTION HEADER #4
+.text$mn name
+       0 physical address
+       0 virtual address
+     176 size of raw data
+     1DB file pointer to raw data (000001DB to 00000350)
+     351 file pointer to relocation table
+       0 file pointer to line numbers
+      15 number of relocations
+       0 number of line numbers
+60500020 flags
+         Code
+         16 byte align
+         Execute Read
+
+RAW DATA #4
+  00000000: 55 8B EC 83 EC 64 A1 00 00 00 00 33 C5 89 45 FC  U.ì.ìd¡....3Å.Eü
+  00000010: A1 00 00 00 00 89 45 EC 8B 0D 04 00 00 00 89 4D  ¡.....Eì.......M
+  00000020: F0 8B 15 08 00 00 00 89 55 F4 66 A1 0C 00 00 00  ð.......Uôf¡....
+  00000030: 66 89 45 F8 C7 45 B8 30 00 00 00 C7 45 BC 03 00  f.EøÇE¸0...ÇE¼..
+  00000040: 00 00 C7 45 C0 00 00 00 00 C7 45 C4 00 00 00 00  ..ÇEÀ....ÇEÄ....
+  00000050: C7 45 C8 00 00 00 00 8B 4D 08 89 4D CC 68 00 7F  ÇEÈ.....M..MÌh..
+  00000060: 00 00 6A 00 FF 15 00 00 00 00 89 45 D0 68 00 7F  ..j.ÿ......EÐh..
+  00000070: 00 00 6A 00 FF 15 00 00 00 00 89 45 D4 6A 00 FF  ..j.ÿ......EÔj.ÿ
+  00000080: 15 00 00 00 00 89 45 D8 8D 55 EC 89 55 E0 C7 45  ......EØ.Uì.UàÇE
+  00000090: DC 00 00 00 00 68 00 7F 00 00 6A 00 FF 15 00 00  Ü....h....j.ÿ...
+  000000A0: 00 00 89 45 E4 8D 45 B8 50 FF 15 00 00 00 00 6A  ...Eä.E¸Pÿ.....j
+  000000B0: 00 8B 4D 08 51 6A 00 6A 00 68 00 00 00 80 68 00  ..M.Qj.j.h....h.
+  000000C0: 00 00 80 68 00 00 00 80 68 00 00 00 80 68 00 00  ...h....h....h..
+  000000D0: CF 00 68 00 00 00 00 8D 55 EC 52 6A 00 FF 15 00  Ï.h.....UìRj.ÿ..
+  000000E0: 00 00 00 89 45 E8 8B 45 14 50 8B 4D E8 51 FF 15  ....Eè.E.P.MèQÿ.
+  000000F0: 00 00 00 00 8B 55 E8 52 FF 15 00 00 00 00 6A 00  .....UèRÿ.....j.
+  00000100: 6A 00 6A 00 8D 45 9C 50 FF 15 00 00 00 00 85 C0  j.j..E.Pÿ......À
+  00000110: 74 16 8D 4D 9C 51 FF 15 00 00 00 00 8D 55 9C 52  t..M.Qÿ......U.R
+  00000120: FF 15 00 00 00 00 EB D6 8B 45 A4 8B 4D FC 33 CD  ÿ.....ëÖ.E¤.Mü3Í
+  00000130: E8 00 00 00 00 8B E5 5D C2 10 00 CC CC CC CC CC  è.....å]Â..ÌÌÌÌÌ
+  00000140: 55 8B EC 51 8B 45 0C 89 45 FC 83 7D FC 02 74 02  U.ìQ.E..Eü.}ü.t.
+  00000150: EB 08 6A 00 FF 15 00 00 00 00 8B 4D 14 51 8B 55  ë.j.ÿ......M.Q.U
+  00000160: 10 52 8B 45 0C 50 8B 4D 08 51 FF 15 00 00 00 00  .R.E.P.M.Qÿ.....
+  00000170: 8B E5 5D C2 10 00                                .å]Â..
+
+RELOCATIONS #4
+                                                Symbol    Symbol
+ Offset    Type              Applied To         Index     Name
+ --------  ----------------  -----------------  --------  ------
+ 00000007  DIR32                      00000000        1B  ___security_cookie
+ 00000011  DIR32                      00000000         8  $SG90084
+ 0000001A  DIR32                      00000004         8  $SG90084
+ 00000023  DIR32                      00000008         8  $SG90084
+ 0000002C  DIR32                      0000000C         8  $SG90084
+ 00000045  DIR32                      00000000        19  ?WndProc@@YGJPAUHWND__@@IIJ@Z (long __stdcall WndProc(struct HWND__ *,unsigned int,unsigned int,long))
+ 00000066  DIR32                      00000000        18  __imp__LoadIconA@8
+ 00000076  DIR32                      00000000        17  __imp__LoadCursorA@8
+ 00000081  DIR32                      00000000         D  __imp__GetStockObject@4
+ 0000009E  DIR32                      00000000        18  __imp__LoadIconA@8
+ 000000AB  DIR32                      00000000        13  __imp__RegisterClassExA@4
+ 000000D3  DIR32                      00000000         9  $SG90085
+ 000000DF  DIR32                      00000000        14  __imp__CreateWindowExA@48
+ 000000F0  DIR32                      00000000        15  __imp__ShowWindow@8
+ 000000FA  DIR32                      00000000        16  __imp__UpdateWindow@4
+ 0000010A  DIR32                      00000000         E  __imp__GetMessageA@16
+ 00000118  DIR32                      00000000         F  __imp__TranslateMessage@4
+ 00000122  DIR32                      00000000        10  __imp__DispatchMessageA@4
+ 00000131  REL32                      00000000        1A  @__security_check_cookie@4
+ 00000156  DIR32                      00000000        12  __imp__PostQuitMessage@4
+ 0000016C  DIR32                      00000000        11  __imp__DefWindowProcA@16
+
+SECTION HEADER #5
+ .chks64 name
+       0 physical address
+       0 virtual address
+      28 size of raw data
+     423 file pointer to raw data (00000423 to 0000044A)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+     A00 flags
+         Info
+         Remove
+         (no align specified)
+
+RAW DATA #5
+  00000000: C7 36 6A 9D 7F DA 0F E2 F2 D9 A0 64 A6 3C 0D EA  Ç6j..Ú.âòÙ.d¦<.ê
+  00000010: 39 5A E9 5E C8 CB 99 72 C0 7D 46 95 7B AF 4B 61  9Zé^ÈË.rÀ}F.{¯Ka
+  00000020: 00 00 00 00 00 00 00 00                          ........
+
+COFF SYMBOL TABLE
+000 01057556 ABS    notype       Static       | @comp.id
+001 80010191 ABS    notype       Static       | @feat.00
+002 00000000 SECT1  notype       Static       | .drectve
+    Section length   5D, #relocs    0, #linenums    0, checksum        0
+004 00000000 SECT2  notype       Static       | .debug$S
+    Section length   7C, #relocs    0, #linenums    0, checksum        0
+006 00000000 SECT3  notype       Static       | .rdata
+    Section length   26, #relocs    0, #linenums    0, checksum  8A9DC1A
+008 00000000 SECT3  notype       Static       | $SG90084
+009 00000010 SECT3  notype       Static       | $SG90085
+00A 00000000 SECT4  notype       Static       | .text$mn
+    Section length  176, #relocs   15, #linenums    0, checksum 94EB165C
+00C 00000000 SECT4  notype ()    External     | _WinMain@16
+00D 00000000 UNDEF  notype       External     | __imp__GetStockObject@4
+00E 00000000 UNDEF  notype       External     | __imp__GetMessageA@16
+00F 00000000 UNDEF  notype       External     | __imp__TranslateMessage@4
+010 00000000 UNDEF  notype       External     | __imp__DispatchMessageA@4
+011 00000000 UNDEF  notype       External     | __imp__DefWindowProcA@16
+012 00000000 UNDEF  notype       External     | __imp__PostQuitMessage@4
+013 00000000 UNDEF  notype       External     | __imp__RegisterClassExA@4
+014 00000000 UNDEF  notype       External     | __imp__CreateWindowExA@48
+015 00000000 UNDEF  notype       External     | __imp__ShowWindow@8
+016 00000000 UNDEF  notype       External     | __imp__UpdateWindow@4
+017 00000000 UNDEF  notype       External     | __imp__LoadCursorA@8
+018 00000000 UNDEF  notype       External     | __imp__LoadIconA@8
+019 00000140 SECT4  notype ()    External     | ?WndProc@@YGJPAUHWND__@@IIJ@Z (long __stdcall WndProc(struct HWND__ *,unsigned int,unsigned int,long))
+01A 00000000 UNDEF  notype ()    External     | @__security_check_cookie@4
+01B 00000000 UNDEF  notype       External     | ___security_cookie
+01C 00000000 SECT5  notype       Static       | .chks64
+    Section length   28, #relocs    0, #linenums    0, checksum        0
+
+String Table Size = 0x176 bytes
+
+  Summary
+
+          28 .chks64
+          7C .debug$S
+          5D .drectve
+          26 .rdata
+         176 .text$mn
