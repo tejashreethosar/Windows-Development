@@ -1,5 +1,5 @@
 #include <windows.h>								//used for Windows APIs, MACROS, datatypes, and predefined functions
-#include "MyMath.h"
+
 //global function declarations
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 

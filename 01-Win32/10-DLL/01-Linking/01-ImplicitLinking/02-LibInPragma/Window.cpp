@@ -91,7 +91,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam) //w
 
 STEPS:
 1. cl.exe Window.cpp /c /EHsc
-2. link.exe Window.obj user32.lib gdi32.lib kernel32.lib MyMath.lib /SUBSYSTEM:WINDOWS
+2. link.exe Window.obj user32.lib gdi32.lib kernel32.lib /SUBSYSTEM:WINDOWS
 3. Window.exe
 
 */
