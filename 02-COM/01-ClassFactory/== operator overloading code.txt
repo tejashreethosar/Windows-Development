@@ -1,0 +1,5 @@
+inline BOOL operator==(const GUID& guidOne, const GUID& guidTwo)
+{
+	//code
+	return IsEqualGuid(guidOne, guidTwo);
+}
