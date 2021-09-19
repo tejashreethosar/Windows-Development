@@ -151,7 +151,8 @@ void SafeInterfaceRelease(void)
 
 /*
 STEPS TO RUN THE CLIENT:
-1. cl.exe /c /EHsc ClientOfClassFactoryDllServerWithRegFile.cpp
-2. link.exe ClientOfClassFactoryDllServerWithRegFile.obj user32.lib gdi32.lib kernel32.lib ole32.lib ole32.lib oleaut32.lib /SUBSYSTEM:WINDOWS
-3. ClientOfClassFactoryDllServerWithRegFile.exe
+1. Double click on the .reg file and update the Windows registry entries.
+2. cl.exe /c /EHsc ClientOfClassFactoryDllServerWithRegFile.cpp
+3. link.exe ClientOfClassFactoryDllServerWithRegFile.obj user32.lib gdi32.lib kernel32.lib ole32.lib ole32.lib oleaut32.lib /SUBSYSTEM:WINDOWS
+4. ClientOfClassFactoryDllServerWithRegFile.exe
 */
