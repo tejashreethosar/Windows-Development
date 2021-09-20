@@ -1,3 +1,4 @@
+/* Identity property tells us that IUnknown is one and same for all the other interfaces (in our case fr ISum and ISubtract) */
 #include <Windows.h>
 #include "ClassFactoryDllServerWithRegFile.h"
 
