@@ -1,3 +1,4 @@
+/* The reflexive property refers to the ability for the QueryInterface call on a given interface with the interface's ID to return the same instance of the interface. */
 #include <Windows.h>
 #include "ClassFactoryDllServerWithRegFile.h"
 
