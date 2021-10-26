@@ -1,0 +1,16 @@
+SERVER:
+1. cl /c /EHsc AutomationServerWithRegFile.cpp
+2. link AutomationServerWithRegFile.obj /DLL /DEF:AutomationServerWithRegFile.def user32.lib ole32.lib oleaut32.lib kernel32.lib gdi32.lib /SUBSYSTEM:WINDOWS 
+
+PROXYSTUB:
+1. midl /h AutomationProxyStubHeader.h /iid AutomationProxyStubGuids.c /dlldata AutomationProxyStubDllData.c /proxy AutomationProxyStub.c AutomationServerTypeLib.idl
+2. cl /c /EHsc /D REGISTER_PROXY_DLL .\AutomationProxyStub.c .\AutomationProxyStubDllData.c .\AutomationProxyStubGuids.c /D WIN32
+3. link AutomationProxyStub.obj AutomationProxyStubDllData.obj AutomationProxyStubGuids.obj /DLL /DEF:AutomationProxyStub.def user32.lib  ole32.lib oleaut32.lib rpcns4.lib rpcrt4.lib advapi32.lib /SUBSYSTEM:WINDOWS
+
+REGISTER PROXY STUB SERVER:
+1. Run as admin [Developer Command prompt or x64 Command prompt]
+2. regsvr32.exe AutomationProxyStub.dll 
+
+C++ CLIENT:
+1. cl /c /EHsc IDispatchAutomationClient.cpp
+2. link IDispatchAutomationClient.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
