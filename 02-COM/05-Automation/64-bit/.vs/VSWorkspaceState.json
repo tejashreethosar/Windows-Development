@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\01-AutomationServerWithRegFile",
+    "\\01-AutomationServerWithRegFile\\AutomationProxyStub",
+    "\\01-AutomationServerWithRegFile\\AutomationServerWithRegFile",
+    "\\02-Clients",
+    "\\02-Clients\\CPP_Client",
+    "\\02-Clients\\CPP_Client\\IDispatch"
+  ],
+  "SelectedNode": "\\02-Clients\\CPP_Client\\IDispatch\\IDispatchAutomationClient.cpp",
+  "PreviewInSolutionExplorer": false
+}
