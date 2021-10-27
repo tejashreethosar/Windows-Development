@@ -14,3 +14,14 @@ REGISTER PROXY STUB SERVER:
 C++ CLIENT:
 1. cl /c /EHsc IDispatchAutomationClient.cpp
 2. link IDispatchAutomationClient.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+3. IDispatchAutomationClient.exe
+
+CSharp CLIENT:
+1. tlbimp.exe C:\Windows\System32\AutomationServerTypeLib.tlb /out:.\AutomationServerTypeLibForDotNet.dll (use this command to generate dll from tlb)
+2. csc.exe /r:AutomationServerTypeLibForDotNet.dll CSharpAutomationClient.cs
+3. CSharpAutomationClient.exe
+
+VB CLIENT:
+1. tlbimp.exe C:\Windows\System32\AutomationServerTypeLib.tlb /out:.\AutomationServerTypeLibForDotNet.dll (use this command to generate dll from tlb)
+2. vbc.exe /t:winexe /r:Microsoft.VisualBasic.dll /r:AutomationServerTypeLibForDotNet.dll VBAutomationClient.vb
+3. VBDotNet>VBAutomationClient.exe
