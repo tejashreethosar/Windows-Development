@@ -78,6 +78,7 @@ BOOL WINAPI DllMain(HINSTANCE hDll, DWORD dwReason, LPVOID Reserved)
 CMyMath::CMyMath(void)
 {
 	// code
+	m_pITypeInfo = NULL;								//private variables must be initialised (always) otherwise compiler misbehaves!!
 	m_cRef = 1;
 	InterlockedIncrement(&glNumberOfActiveComponents);
 }
