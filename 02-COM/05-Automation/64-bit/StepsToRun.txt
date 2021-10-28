@@ -11,9 +11,26 @@ REGISTER PROXY STUB SERVER:
 1. Run as admin [Developer Command prompt or x64 Command prompt]
 2. regsvr32.exe AutomationProxyStub.dll 
 
+Double click on the ".reg" file in order to update the registry entries.
+
+C CLIENT:
+[ClassFactory]
+1. cl.exe /c /EHsc IClassFactoryAutomationClient_C.c
+2. link.exe IClassFactoryAutomationClient_C.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+3. IClassFactoryAutomationClient_C.exe
+[IDispatch]
+1. cl.exe /c /EHsc IDispatchAutomationClient.c
+2. link.exe user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+3. IDispatchAutomationClient.exe
+
 C++ CLIENT:
-1. cl /c /EHsc IDispatchAutomationClient.cpp
-2. link IDispatchAutomationClient.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+[ClassFactory]
+1. cl.exe /c /EHsc IDispatchAutomationClient.cpp
+2. link.exe IDispatchAutomationClient.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+3. IDispatchAutomationClient.exe
+[IDispatch]
+1. cl.exe /c /EHsc IDispatchAutomationClient.cpp
+2. link.exe user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
 3. IDispatchAutomationClient.exe
 
 CSharp CLIENT:
