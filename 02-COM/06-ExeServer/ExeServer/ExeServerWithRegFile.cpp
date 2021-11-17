@@ -1,27 +1,51 @@
+﻿#define UNICODE
 #include<Windows.h>
 #include<tlhelp32.h>
 #include"ExeServerWithRegFile.h"
 
 // global function declarations
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM)
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 // class declarations
-class CSumSubtract :public ISum, ISubtract
+class CSumSubtract : public ISum, ISubtract
 {
 private:
 	long m_cRef;
 public:
-	// constructor method declarations
+	//constructor method declarations
 	CSumSubtract(void);
-	// destructor method declarations
+	//destructor method declarations
 	~CSumSubtract(void);
 
-	// IUnknown specific method declarations (inherited)
+	//IUnknown specific method declarations (inherited)
 	HRESULT __stdcall QueryInterface(REFIID, void**);
 	ULONG __stdcall AddRef(void);
 	ULONG __stdcall Release(void);
 
-	// IClassFactory specific method declarations (inherited)
+	//ISum specific method declarations
+	HRESULT __stdcall SumOfTwoIntegers(int, int, int*);
+
+	//ISubtract specific method declarations
+	HRESULT __stdcall SubtractionOfTwoIntegers(int, int, int*);
+};
+
+class CSumSubtractClassFactory : public IClassFactory
+{
+private:
+	long m_cRef;
+public:
+	//constructor method declarations
+	CSumSubtractClassFactory(void);
+
+	//destructor method declarations
+	~CSumSubtractClassFactory(void);
+
+	//IUnknown specific method declarations (inherited)
+	HRESULT __stdcall QueryInterface(REFIID, void**);
+	ULONG __stdcall AddRef(void);
+	ULONG __stdcall Release(void);
+
+	//IClassFactory specific method declarations (inherited)
 	HRESULT __stdcall CreateInstance(IUnknown*, REFIID, void**);
 	HRESULT __stdcall LockServer(BOOL);
 };
@@ -147,8 +171,275 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	// COM library uninitialization
 	CoUninitialize();
-
 	return((int)msg.wParam);
 }
 
-// Window Procedure Pg - 100
+// Window Procedure
+LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
+{
+	// variable declarations
+	HDC hdc;
+	RECT rc;
+	PAINTSTRUCT ps;
+	switch (iMsg) 
+	{
+
+	case WM_PAINT:
+		GetClientRect(hwnd, &rc);
+		hdc = BeginPaint(hwnd, &ps);
+		SetBkColor(hdc, RGB(0, 0, 0));
+		SetTextColor(hdc, RGB(0, 255, 0));
+		DrawText(hdc, TEXT("This is a COM Exe Server Program. Not For You!!!"), -1, &rc, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+		EndPaint(hwnd, &ps);
+		break;
+
+	case WM_DESTROY:
+		if (glNumberOfActiveComponents == 0 && glNumberOfServerLocks == 0)
+			PostQuitMessage(0);
+		break;
+
+	case WM_CLOSE:
+		--glNumberOfServerLocks;
+		ShowWindow(hwnd, SW_HIDE);
+		// fall through, hence no break
+
+	default:
+		return(DefWindowProc(hwnd, iMsg, wParam, lParam));
+	}
+
+	return(0L);
+}
+
+//Implementation of CSumSubtract's Constructor Method
+CSumSubtract::CSumSubtract(void)
+{
+	//hardcoded initialization to anticipate possible failure of QueryInterface()
+	m_cRef = 1;
+
+	InterlockedIncrement(&glNumberOfActiveComponents);	//increment global counter
+}
+
+//Implementation of CSumSubtract's Destructor Method
+CSumSubtract::~CSumSubtract(void)
+{
+	InterlockedDecrement(&glNumberOfActiveComponents);	//decrement global counter
+}
+
+//Implementation of CSumSubtract's IUnknown's Methods
+HRESULT CSumSubtract::QueryInterface(REFIID riid, void** ppv)
+{
+	if (riid == IID_IUnknown)
+		*ppv = static_cast<ISum*>(this);
+	else if (riid == IID_ISum)
+		*ppv = static_cast<ISum*>(this);
+	else if (riid == IID_ISubtract)
+		*ppv = static_cast<ISubtract*>(this);
+	else
+	{
+		*ppv = NULL;
+		return(E_NOINTERFACE);
+	}
+	reinterpret_cast<IUnknown*>(*ppv)->AddRef();
+	return(S_OK);
+}
+
+ULONG CSumSubtract::AddRef(void)
+{
+	InterlockedIncrement(&m_cRef);
+	return(m_cRef);
+}
+
+ULONG CSumSubtract::Release(void)
+{
+	InterlockedDecrement(&m_cRef);
+	if (m_cRef == 0)
+	{
+		delete(this);		//delete before posting WM_QUIT message
+		if (glNumberOfActiveComponents == 0 && glNumberOfServerLocks == 0)
+			PostMessage(ghwnd, WM_QUIT, (WPARAM)0, (LPARAM)0L);
+		return(0);
+	}
+	return(m_cRef);
+}
+
+//Implementation of ISum's Methods
+HRESULT CSumSubtract::SumOfTwoIntegers(int num1, int num2, int* pSum)
+{
+	*pSum = num1 - num2;		//done deliberately
+	return(S_OK);
+}
+
+//Implementation of ISubtract's Methods
+HRESULT CSumSubtract::SubtractionOfTwoIntegers(int num1, int num2, int* pSubtract)
+{
+	*pSubtract = num1 + num2;	//done deliberately
+	return(S_OK);
+}
+
+//Implementation of CSumSubtractClassFactory's Constructor Method
+CSumSubtractClassFactory::CSumSubtractClassFactory(void)
+{
+	//hardcoded initialization to anticipate possible failure of QueryInterface();
+	m_cRef = 1;
+}
+
+//Implementation of CSumSubtractClassFactory's Destrcutor Method
+CSumSubtractClassFactory::~CSumSubtractClassFactory(void)
+{
+	//no code
+}
+
+//Implementation of CSumSubtractClassFactory's IClassFactory's IUnknown's Methods
+HRESULT CSumSubtractClassFactory::QueryInterface(REFIID riid, void** ppv)
+{
+	if (riid == IID_IUnknown)
+		*ppv = static_cast<IClassFactory*>(this);
+	else if (riid == IID_IClassFactory)
+		*ppv = static_cast<IClassFactory*>(this);
+	else
+	{
+		*ppv = NULL;
+		return(E_NOINTERFACE);
+	}
+	reinterpret_cast<IUnknown*>(*ppv)->AddRef();
+	return(S_OK);
+}
+
+ULONG CSumSubtractClassFactory::AddRef(void)
+{
+	InterlockedIncrement(&m_cRef);
+	return(m_cRef);
+}
+
+ULONG CSumSubtractClassFactory::Release(void)
+{
+	InterlockedDecrement(&m_cRef);
+	if (m_cRef == 0)
+	{
+		delete(this);
+		return(0);
+	}
+	return(m_cRef);
+}
+
+//Implementation of CSumSubtractClassFactory's IClassFactory's Methods
+HRESULT CSumSubtractClassFactory::CreateInstance(IUnknown* pUnkOuter, REFIID riid, void** ppv)
+{
+	//variable declarations
+	CSumSubtract* pCSumSubtract = NULL;
+	HRESULT hr;
+
+	//code
+	if (pUnkOuter != NULL)
+		return(CLASS_E_NOAGGREGATION);
+
+	//create the instance of component i.e. of CSumSubtract class
+	pCSumSubtract = new CSumSubtract;
+
+	if (pCSumSubtract == NULL)
+		return(E_OUTOFMEMORY);
+
+	//get the requested interface
+	hr = pCSumSubtract->QueryInterface(riid, ppv);
+
+	//anticipate the possible failure of QueryInterface()
+	pCSumSubtract->Release();
+
+	return(hr);
+}
+
+HRESULT CSumSubtractClassFactory::LockServer(BOOL fLock)
+{
+	if (fLock)
+		InterlockedIncrement(&glNumberOfActiveComponents);
+	else
+		InterlockedDecrement(&glNumberOfActiveComponents);
+	if (glNumberOfActiveComponents == 0 && glNumberOfServerLocks == 0)
+		PostMessage(ghwnd, WM_QUIT, (WPARAM)0, (LPARAM)0L);
+
+	return(S_OK);
+}
+
+HRESULT StartMyClassFactories(void)
+{
+	//variable declarations
+	HRESULT hr;
+
+	gpIClassFactory = new CSumSubtractClassFactory;
+	if (gpIClassFactory == NULL)
+		return(E_OUTOFMEMORY);
+
+	gpIClassFactory->AddRef();
+
+	// register the class factory in COM's private database
+	hr = CoRegisterClassObject(CLSID_SumSubtract, static_cast<IUnknown*>(gpIClassFactory), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &dwRegister);
+
+	/* CoRegisterClassobject registers the CLSID for the server in what is called the class table(a different table than the running object table).When a server is registered in the class table, 
+		it allows the service control manager(SCM) to determine that it is not necessary to launch the class again, because the server is already running. Only if the server is not listed in the 
+		class table will the SCM check the registry for appropriate values ​​and launch the server associated with the given CLSID. */
+
+	if (FAILED(hr))
+	{
+		gpIClassFactory->Release();
+		return(E_FAIL);
+	}
+
+	return(S_OK);
+}
+
+void StopMyClassFactories(void)
+{
+	// un-register the class factory
+	if (dwRegister != 0)
+		CoRevokeClassObject(dwRegister);
+
+	/* CoRevokeClassObject revokes the class object (remove its registration) when all of the following are true:
+	- There are no existing instances of the object definition 
+	- There are no locks on the class object
+	- The application providing services to the class object is not under user control (not visible to the user on the display).
+	*/
+
+	if (gpIClassFactory != NULL)
+		gpIClassFactory->Release();
+}
+
+DWORD GetParentProcessID(void)
+{
+	// variable declarations
+	HANDLE hProcessSnapshot = NULL;
+	BOOL bRetCode = FALSE;
+	PROCESSENTRY32 ProcessEntry = { 0 };
+	DWORD dwPPID;
+	TCHAR szNameOfThisProcess[_MAX_PATH], szNameOfParentProcess[_MAX_PATH];
+	TCHAR szTemp[_MAX_PATH], str[_MAX_PATH], * ptr = NULL;
+
+	// first take current system snapshot
+	hProcessSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	if (hProcessSnapshot == INVALID_HANDLE_VALUE)
+		return(-1);
+	ProcessEntry.dwSize = sizeof(PROCESSENTRY32);
+
+	// walk process hierarchy
+	if (Process32First(hProcessSnapshot, &ProcessEntry))
+	{
+		GetModuleFileName(NULL, szTemp, _MAX_PATH);
+		ptr = wcsrchr(szTemp, '\\');
+		wcscpy_s(szNameOfThisProcess, ptr + 1);
+		do
+		{
+			errno_t err;
+			err = _wcslwr_s(szNameOfThisProcess, wcslen(szNameOfThisProcess) + 1);
+			err = _wcsupr_s(ProcessEntry.szExeFile, wcslen(ProcessEntry.szExeFile) + 1);
+			if (wcsstr(szNameOfThisProcess, ProcessEntry.szExeFile) != NULL)
+			{
+				wsprintf(str, TEXT("Current Process Name = %s\nCurrent Process ID = %ld\nParent Process ID = %ld\nParent Process Name = %s"), szNameOfThisProcess, ProcessEntry.th32ProcessID, ProcessEntry.th32ParentProcessID,
+					ProcessEntry.szExeFile);
+
+				MessageBox(NULL, str, TEXT("Parent Info"), MB_OK | MB_TOPMOST);
+				dwPPID = ProcessEntry.th32ParentProcessID;
+			}
+		} while (Process32Next(hProcessSnapshot, &ProcessEntry));
+	}
+	CloseHandle(hProcessSnapshot);
+	return(dwPPID);
+}
