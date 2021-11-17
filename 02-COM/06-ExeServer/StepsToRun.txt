@@ -1,0 +1,25 @@
+*64 bit command prompt*
+
+SERVER:
+1. cl.exe /c /EHsc ExeServerWithRegFile.cpp
+2. link.exe ExeServerWithRegFile.obj user32.lib ole32.lib oleaut32.lib kernel32.lib gdi32.lib /SUBSYSTEM:WINDOWS
+3. ExeServerWithRegFile.exe
+
+Copy "ExeServerWithRegFile.exe" to "C:" drive [as stated in the .reg file]
+
+PROXYSTUB:
+1. midl /h ProxyStubHeader.h /iid ProxyStubGuids.c /dlldata ProxyStubDlldata.c /proxy ProxyStub.c ProxyStub.idl
+2. cl.exe /c /EHsc /D REGISTER_PROXY_DLL .\ProxyStub.c .\ProxyStubDlldata.c .\ProxyStubGuids.c /D WIN32
+3. link.exe ProxyStub.obj ProxyStubDlldata.obj ProxyStubGuids.obj /DLL /DEF:ProxyStub.def user32.lib  ole32.lib oleaut32.lib rpcns4.lib rpcrt4.lib advapi32.lib /SUBSYSTEM:WINDOWS
+
+Copy "ProxyStub.dll" to "C:\Windows\System32" folder (64 bit dll)
+
+REGISTER PROXY STUB SERVER:
+1. Run as admin [Developer Command prompt or x64 Command prompt]
+2. regsvr32.exe ProxyStub.dll 
+
+CLIENT:
+1. Double click on the ".reg" file in order to update the registry entries.
+2. cl.exe /c /EHsc ClientOfExeServerWithRegFile.cpp
+3. link.exe ClientOfExeServerWithRegFile.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib
+4. ClientOfExeServerWithRegFile.exe
