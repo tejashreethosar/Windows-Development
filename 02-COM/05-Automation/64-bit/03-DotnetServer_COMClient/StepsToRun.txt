@@ -1,0 +1,21 @@
+SERVER:
+(x64 Command prompt)
+-------------------------------------------
+1. csc.exe /t:library DotNetServer.cs (this will create .dll)
+
+
+(Run x64 Command Prompt as Administrator)
+-------------------------------------------
+1. RegAsm.exe DotNetServer.dll /tlb
+This command will create CCW [ COM Callable Wrapper ]
+
+
+CLIENT:
+-------------------------------------------
+1. cl.exe /c /EHsc COMClient.cpp
+2. link.exe COMClient.obj user32.lib kernel32.lib gdi32.lib ole32.lib oleaut32.lib /SUBSYSTEM:WINDOWS
+3. COMClient.exe
+
+
+// Run the x64 CMD as admin
+oleview.exe -> File -> Open tlb (to check the typelibrary's content)
