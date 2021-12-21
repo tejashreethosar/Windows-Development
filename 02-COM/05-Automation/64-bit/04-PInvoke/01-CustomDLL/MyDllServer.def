@@ -1,0 +1,3 @@
+LIBRARY MyDllServer
+EXPORTS
+	SumOfTwoIntegers
